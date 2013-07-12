@@ -1,0 +1,45 @@
+==================================================
+Changes from 2012-07-12 00:00:00 +0000 to present.
+==================================================
+
+---------------------------------------------
+version 0.000001 at 2013-07-12 08:05:17 +0000
+---------------------------------------------
+
+  Change: 2edb972393e3f1b3163e2fccb0ce8a9cfd32f188
+  Author: Al Newkirk <anewkirk@ana.io>
+  Date : 2013-07-12 04:05:05 +0000
+
+    fixed common issue with test methods, updated documentation 
+
+  Change: 4e561a72071609ab03f219994091cbea70530d68
+  Author: Al Newkirk <anewkirk@ana.io>
+  Date : 2013-07-11 15:46:15 +0000
+
+    updated documentation 
+
+  Change: 791cfd58efe636df377cec5ebb30f6b97112b62a
+  Author: Al Newkirk <anewkirk@ana.io>
+  Date : 2013-07-11 01:49:41 +0000
+
+    refactored how psgi apps are loaded
+
+    refactored how psgi apps are loaded
+
+    fixed test and documentation 
+
+  Change: a836119117c66481365a92f0a18b2bf45db5eb30
+  Author: Al Newkirk <anewkirk@ana.io>
+  Date : 2013-07-10 23:15:11 +0000
+
+    updated dist.ini 
+
+  Change: 842bbe172445d2815e0760bf97c1265eb110df15
+  Author: Al Newkirk <anewkirk@ana.io>
+  Date : 2013-07-10 23:14:33 +0000
+
+    initial commit 
+
+================
+End of releases.
+================

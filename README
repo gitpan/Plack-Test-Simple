@@ -1,0 +1,294 @@
+NAME
+    Plack::Test::Simple - Object-Oriented PSGI Application Testing
+
+VERSION
+    version 0.000001
+
+SYNOPSIS
+    Plack::Test::Simple is a collection of testing helpers for anyone
+    developing Plack applications. This module is a wrapper around
+    Plack::Test, based on the design of Test::Mojo, providing a unified
+    interface to test PSGI applications using HTTP::Request and
+    HTTP::Response objects. Typically a Plack web application's deployment
+    stack includes various middlewares and utilities which are now even
+    easier to test along-side the actual web application code.
+
+SYNOPSIS
+        use Test::More;
+        use Plack::Test::Simple;
+
+        my $t   = Plack::Test::Simple->new('/path/to/app.psgi');
+        my $req = $t->request;
+        my $res = $t->response;
+
+        # setup
+        $req->headers->authorization_basic('h@cker', 's3cret');
+        $req->headers->content_type('application/json');
+        $req->content('');
+
+        # text GET request
+        $t->can_get('/')->status_is(200);
+        $t->content_like(qr/hello world/i);
+
+        # json POST request
+        $t->can_post('/search')->status_is(200);
+        $t->data_has('/results/4/title');
+
+        done_testing;
+
+ATTRIBUTES
+  data
+    The data attribute contains a hashref corresponding to the UTF-8 decoded
+    JSON string found in the HTTP response body.
+
+  psgi
+    The psgi attribute contains a coderef containing the PSGI compliant
+    application code.
+
+  request
+    The request attribute contains the HTTP::Request object which will be
+    used to process the HTTP requests. This attribute is never reset.
+
+  response
+    The response attribute contains the HTTP::Response object which will be
+    automatically set upon issuing an HTTP requests. This attribute is reset
+    upon each request.
+
+METHODS
+  can_get
+    The can_get method tests whether an HTTP request to the supplied path is
+    a success.
+
+        $self->can_get('/users');
+        $self->can_get('/users' => 'http get /users ok');
+
+  cant_get
+    The cant_get method tests whether an HTTP request to the supplied path
+    is a success.
+
+        $self->cant_get('/');
+        $self->cant_get('/users' => 'http get /users not ok');
+
+  can_post
+    The can_post method tests whether an HTTP request to the supplied path
+    is a success.
+
+        $self->can_post('/users');
+        $self->can_post('/users' => 'http post /users ok');
+
+  cant_post
+    The cant_post method tests whether an HTTP request to the supplied path
+    is a success.
+
+        $self->cant_post('/users');
+        $self->cant_post('/users' => 'http post /users not ok');
+
+  can_put
+    The can_put method tests whether an HTTP request to the supplied path is
+    a success.
+
+        $self->can_put('/users');
+        $self->can_put('/users' => 'http put /users ok');
+
+  cant_put
+    The cant_put method tests whether an HTTP request to the supplied path
+    is a success.
+
+        $self->cant_put('/users');
+        $self->cant_put('/users' => 'http put /users not ok');
+
+  can_delete
+    The can_delete method tests whether an HTTP request to the supplied path
+    is a success.
+
+        $self->can_delete('/users');
+        $self->can_delete('/users' => 'http delete /users ok');
+
+  cant_delete
+    The cant_delete method tests whether an HTTP request to the supplied
+    path is a success.
+
+        $self->cant_delete('/users');
+        $self->cant_delete('/users' => 'http delete /users not ok');
+
+  can_head
+    The can_head method tests whether an HTTP request to the supplied path
+    is a success.
+
+        $self->can_head('/users');
+        $self->can_head('/users' => 'http head /users ok');
+
+  cant_head
+    The cant_head method tests whether an HTTP request to the supplied path
+    is a success.
+
+        $self->cant_head('/users');
+        $self->cant_head('/users' => 'http head /users ok');
+
+  can_options
+    The can_options method tests whether an HTTP request to the supplied
+    path is a success.
+
+        $self->can_options('/users');
+        $self->can_options('/users' => 'http options /users ok');
+
+  cant_options
+    The cant_options method tests whether an HTTP request to the supplied
+    path is a success.
+
+        $self->cant_options('/users');
+        $self->cant_options('/users' => 'http options /users not ok');
+
+  can_trace
+    The can_trace method tests whether an HTTP request to the supplied path
+    is a success.
+
+        $self->can_trace('/users');
+        $self->can_trace('/users' => 'http trace /users ok');
+
+  cant_trace
+    The cant_trace method tests whether an HTTP request to the supplied path
+    is a success.
+
+        $self->cant_trace('/users');
+        $self->cant_trace('/users' => 'http trace /users not ok');
+
+  content_is
+    The content_is method tests if the HTTP::Response decoded body matches
+    the value specified.
+
+        $self->content_is($value);
+        $self->content_is($value => 'body ok');
+
+  content_isnt
+    The content_isnt method tests if the HTTP::Response decoded body does
+    not match the value specified.
+
+        $self->content_isnt($value);
+        $self->content_isnt($value => 'body not ok');
+
+  content_like
+    The content_like method tests if the HTTP::Response decoded body
+    contains matches for the regex value specified.
+
+        $self->content_like(qr/body/);
+        $self->content_like(qr/body/ => 'body found');
+
+  content_unlike
+    The content_unlike method tests if the HTTP::Response decoded body does
+    not contain matches for the regex value specified.
+
+        $self->content_isnt(qr/body/);
+        $self->content_is(qr/body/ => 'body not found');
+
+  content_type_is
+    The content_type_is method tests if the HTTP::Response Content-Type
+    header matches the value specified.
+
+        $self->content_type_is('application/json');
+        $self->content_type_is('application/json' => 'json data returned');
+
+  content_type_isnt
+    The content_type_isnt method tests if the HTTP::Response Content-Type
+    header does not match the value specified.
+
+        $self->content_type_isnt('application/json');
+        $self->content_type_isnt('application/json' => 'json data not returned');
+
+  content_type_like
+    The content_type_like method tests if the HTTP::Response Content-Type
+    header contains matches for the regex value specified.
+
+        $self->content_type_like(qr/json/);
+        $self->content_type_like(qr/json/ => 'json data returned');
+
+  content_type_unlike
+    The content_type_unlike method tests if the HTTP::Response Content-Type
+    header does not contain matches for the regex value specified.
+
+        $self->content_type_like(qr/json/);
+        $self->content_type_like(qr/json/ => 'json data returned');
+
+  header_is
+    The header_is method tests if the HTTP::Response header specified
+    matches the value specified.
+
+        $self->header_is('Server', 'nginx');
+        $self->header_is('Server', 'nginx' => 'server header ok');
+
+  header_isnt
+    The header_isnt method tests if the HTTP::Response header specified does
+    not match the value specified.
+
+        $self->header_isnt('Server', 'nginx');
+        $self->header_isnt('Server', 'nginx' => 'server header not ok');
+
+  header_like
+    The header_like method tests if the HTTP::Response header specified
+    contains matches for the regex value specified.
+
+        $self->header_like('Server', qr/nginx/);
+        $self->header_like('Server', qr/nginx/ => 'server header ok');
+
+  header_unlike
+    The header_unlike method tests if the HTTP::Response header specified
+    does not contain matches for the regex value specified.
+
+        $self->header_unlike('Server', qr/nginx/);
+        $self->header_unlike('Server', qr/nginx/ => 'server header not ok');
+
+  data_has
+    The data_has method tests if the HTTP::Response decoded JSON structure
+    contains matches for the Data::DPath path value specified.
+
+        $self->data_has('/results');
+        $self->data_has('/results' => 'json results returned');
+
+  data_hasnt
+    The data_hasnt method tests if the HTTP::Response decoded JSON structure
+    does not contain matches for the Data::DPath path value specified.
+
+        $self->data_hasnt('/results');
+        $self->data_hasnt('/results' => 'json results were not returned');
+
+  data_is_deeply
+    The data_is_deeply method tests if the HTTP::Response decoded JSON
+    structure contains matches for the Data::DPath path value specified,
+    then tests if the first match matches the supplied Perl data structure
+    exactly.
+
+        $self->data_is_deeply('/results', $data);
+        $self->data_is_deeply('/results', $data => 'data structure exact match');
+
+  data_match
+    The data_match method is an alias for the data_is_deeply method which
+    tests if the HTTP::Response decoded JSON structure contains matches for
+    the Data::DPath path value specified, then tests if the first match
+    matches the supplied Perl data structure exactly.
+
+        $self->data_match('/results', $data);
+        $self->data_match('/results', $data => 'data structure exact match');
+
+  status_is
+    The status_is method tests if the HTTP::Response code matches the value
+    specified.
+
+        $self->status_is(404);
+        $self->status_is(404 => 'page not found');
+
+  status_isnt
+    The status_isnt method tests if the HTTP::Response code does not match
+    the value specified.
+
+        $self->status_isnt(404);
+        $self->status_isnt(404 => 'page found');
+
+AUTHOR
+    Al Newkirk <anewkirk@ana.io>
+
+COPYRIGHT AND LICENSE
+    This software is copyright (c) 2013 by Al Newkirk.
+
+    This is free software; you can redistribute it and/or modify it under
+    the same terms as the Perl 5 programming language system itself.
+
