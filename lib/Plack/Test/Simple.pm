@@ -13,7 +13,7 @@ use Moo;
 
 use utf8;
 
-our $VERSION = '0.000002'; # VERSION
+our $VERSION = '0.000003'; # VERSION
 
 
 sub BUILDARGS {
@@ -457,7 +457,7 @@ Plack::Test::Simple - Object-Oriented PSGI Application Testing
 
 =head1 VERSION
 
-version 0.000002
+version 0.000003
 
 =head1 SYNOPSIS
 

@@ -3,8 +3,24 @@ Changes from 2012-07-30 00:00:00 +0000 to present.
 ==================================================
 
 ---------------------------------------------
-version 0.000002 at 2013-07-30 01:55:43 +0000
+version 0.000003 at 2013-07-30 10:25:10 +0000
 ---------------------------------------------
+
+  Change: a9a9319027b3ccf45d8db7f087ac7f397df6c3ff
+  Author: Al Newkirk <anewkirk@ana.io>
+  Date : 2013-07-30 06:24:40 +0000
+
+    fixed env.psgi to prevent serialization failures 
+
+---------------------------------------------
+version 0.000002 at 2013-07-30 01:55:52 +0000
+---------------------------------------------
+
+  Change: f562f1fa396e9905e3badbcc02fb343e0922937b
+  Author: Al Newkirk <anewkirk@ana.io>
+  Date : 2013-07-29 21:55:52 +0000
+
+    v0.000002 
 
   Change: 1097842db5952c70b592b1b8c4967b784bd68fed
   Author: Al Newkirk <anewkirk@ana.io>
