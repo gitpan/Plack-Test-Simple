@@ -13,6 +13,8 @@ use Moo;
 
 use utf8;
 
+our $VERSION = '0.000002'; # VERSION
+
 
 sub BUILDARGS {
     my ($class, @args) = @_;
@@ -408,6 +410,7 @@ sub _http_request {
     $path ||= '/';
     $desc ||= "got response for $method $path";
 
+    $self->request->remove_header('Content-Length'); # reset
     $self->request->method($method);
     $self->request->uri->path($path);
 
@@ -435,6 +438,7 @@ sub _reset_request_response {
 
 sub _test_more {
     my ($self, $name, @args) = @_;
+
     local $Test::Builder::Level = $Test::Builder::Level + 2;
     Test::More->can($name)->(@args);
 
@@ -453,7 +457,7 @@ Plack::Test::Simple - Object-Oriented PSGI Application Testing
 
 =head1 VERSION
 
-version 0.000001
+version 0.000002
 
 =head1 SYNOPSIS
 
@@ -686,8 +690,8 @@ header contains matches for the regex value specified.
 The content_type_unlike method tests if the L<HTTP::Response> Content-Type
 header does not contain matches for the regex value specified.
 
-    $self->content_type_like(qr/json/);
-    $self->content_type_like(qr/json/ => 'json data returned');
+    $self->content_type_unlike(qr/json/);
+    $self->content_type_unlike(qr/json/ => 'json data not returned');
 
 =head2 header_is
 
