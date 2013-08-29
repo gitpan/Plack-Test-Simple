@@ -223,7 +223,7 @@ Plack::Test::Simple::Transaction - PSGI Automated Application Testing Layer
 
 =head1 VERSION
 
-version 0.000004
+version 0.000005
 
 =head1 SYNOPSIS
 
@@ -231,10 +231,10 @@ version 0.000004
     use Plack::Test::Simple::Transaction;
 
     # prepare test container
-    my $tx = Plack::Test::Simple::Transaction->new('/path/to/app.psgi');
+    my $tx  = Plack::Test::Simple::Transaction->new('/path/to/app.psgi');
+    my $req = $tx->request;
 
     # get request setup
-    my $req = $tx->request;
     $req->method('GET');
     $request->uri(URI->new('/path/to/resource'));
     $req->headers->authorization_basic('h@cker', 's3cret');
