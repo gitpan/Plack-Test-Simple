@@ -28,4 +28,4 @@ resources:
   bugtracker: https://github.com/alnewkirk/Plack-Test-Simple/issues
   homepage: http://search.cpan.org/dist/Plack-Test-Simple/
   repository: git://github.com/alnewkirk/Plack-Test-Simple.git
-version: 0.000006
+version: 0.000007

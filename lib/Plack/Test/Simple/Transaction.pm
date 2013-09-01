@@ -223,7 +223,7 @@ Plack::Test::Simple::Transaction - PSGI Automated Application Testing Layer
 
 =head1 VERSION
 
-version 0.000006
+version 0.000007
 
 =head1 SYNOPSIS
 
