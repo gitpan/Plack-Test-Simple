@@ -11,7 +11,7 @@ use Plack::Util;
 use Plack::Test::Simple::Transaction;
 use JSON qw(encode_json);
 
-our $VERSION = '0.000007'; # VERSION
+our $VERSION = '0.000008'; # VERSION
 
 
 sub BUILDARGS {
@@ -36,7 +36,21 @@ sub _build_request {
 
 
 has psgi => (
-    is   => 'rw',
+    is     => 'rw',
+    isa    => sub {
+        my $psgi = shift;
+
+        die 'The psgi attribute must must be a valid PSGI filepath or code '.
+            'reference' if !$psgi && ('CODE' eq ref($psgi) xor -f $psgi);
+    },
+    coerce => sub {
+        my $psgi = shift;
+
+        # return psgi
+        return $psgi if (ref $psgi) =~ /Plack::Test::/; # very trusting
+        return Plack::Test->create($psgi) if 'CODE' eq ref $psgi;
+        return Plack::Test->create(Plack::Util::load_psgi($psgi));
+    }
 );
 
 
@@ -103,11 +117,11 @@ Plack::Test::Simple - Object-Oriented PSGI Application Testing
 
 =head1 VERSION
 
-version 0.000007
+version 0.000008
 
 =head1 SYNOPSIS
 
-    Test::More;
+    use Test::More;
     use Plack::Test::Simple;
 
     # prepare test container
@@ -144,7 +158,8 @@ to process the HTTP requests. This attribute is never reset.
 =head2 psgi
 
 The psgi attribute contains a coderef containing the PSGI compliant application
-code or a string containing the path to the psgi file.
+code. If this value is a string containing the path to the psgi file, the
+application code will be coerced.
 
 =head1 METHODS
 

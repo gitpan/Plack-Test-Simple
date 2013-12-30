@@ -2,10 +2,10 @@ NAME
     Plack::Test::Simple - Object-Oriented PSGI Application Testing
 
 VERSION
-    version 0.000007
+    version 0.000008
 
 SYNOPSIS
-        Test::More;
+        use Test::More;
         use Plack::Test::Simple;
 
         # prepare test container
@@ -39,7 +39,8 @@ ATTRIBUTES
 
   psgi
     The psgi attribute contains a coderef containing the PSGI compliant
-    application code or a string containing the path to the psgi file.
+    application code. If this value is a string containing the path to the
+    psgi file, the application code will be coerced.
 
 METHODS
   transaction

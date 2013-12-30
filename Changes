@@ -1,10 +1,26 @@
 ==================================================
-Changes from 2012-09-01 00:00:00 +0000 to present.
+Changes from 2012-12-30 00:00:00 +0000 to present.
 ==================================================
 
 ---------------------------------------------
-version 0.000007 at 2013-09-01 16:43:32 +0000
+version 0.000008 at 2013-12-30 08:52:09 +0000
 ---------------------------------------------
+
+  Change: cd7a6bb297a5baf6c297e67d71ff39bdfc2e84f8
+  Author: Al Newkirk <anewkirk@ana.io>
+  Date : 2013-12-30 03:51:28 +0000
+
+    fixed psgi app reloading with multiple transactions 
+
+---------------------------------------------
+version 0.000007 at 2013-09-01 16:43:39 +0000
+---------------------------------------------
+
+  Change: f45387afcf2451a4a6cc21212c759ca4619e8b8c
+  Author: Al Newkirk <anewkirk@ana.io>
+  Date : 2013-09-01 12:43:39 +0000
+
+    v0.000007 
 
   Change: 12d8d34f9d1a0cb18d1ccb9fa70541002224ee7e
   Author: Al Newkirk <anewkirk@ana.io>
