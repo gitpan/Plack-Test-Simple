@@ -2,17 +2,20 @@
 package Plack::Test::Simple::Transaction;
 
 use utf8;
+
 use HTTP::Request;
 use HTTP::Response;
-use URI;
 use Moo;
 use Plack::Util;
-use JSON        qw(decode_json);
-use Test::More  qw();
+use URI;
+
 use Plack::Test qw();
+use Test::More qw();
+
 use Data::DPath qw(dpath);
+use JSON qw(decode_json);
 
-
+our $VERSION = '0.02'; # VERSION
 
 has data => (
     is      => 'rw',
@@ -31,11 +34,9 @@ sub _build_data {
     return decode_json $self->response->decoded_content;
 }
 
-
 has psgi => (
     is   => 'rw',
 );
-
 
 has request => (
     is      => 'rw',
@@ -49,7 +50,6 @@ sub _build_request {
     )
 }
 
-
 has response => (
     is      => 'rw',
     lazy    => 1,
@@ -61,7 +61,6 @@ sub _build_response {
     return $self->psgi->request($self->request);
 }
 
-
 sub content_is {
     my ($self, $value, $desc) = @_;
     $desc ||= 'exact match for content';
@@ -69,7 +68,6 @@ sub content_is {
         'is', $self->response->decoded_content, $value, $desc
     );
 }
-
 
 sub content_isnt {
     my ($self, $value, $desc) = @_;
@@ -79,7 +77,6 @@ sub content_isnt {
     );
 }
 
-
 sub content_like {
     my ($self, $regex, $desc) = @_;
     $desc ||= 'content contains the expression specified';
@@ -88,7 +85,6 @@ sub content_like {
     );
 }
 
-
 sub content_unlike {
     my ($self, $regex, $desc) = @_;
     $desc ||= 'content does not contain the expression specified';
@@ -96,7 +92,6 @@ sub content_unlike {
         'unlike', $self->response->decoded_content, $regex, $desc
     );
 }
-
 
 sub data_has {
     my ($self, $path, $desc) = @_;
@@ -107,7 +102,6 @@ sub data_has {
     );
 }
 
-
 sub data_hasnt {
     my ($self, $path, $desc) = @_;
     $desc ||= qq{has no value for data path "$path"};
@@ -116,7 +110,6 @@ sub data_hasnt {
         'ok', !$rs->[0], $desc
     );
 }
-
 
 sub data_is_deeply {
     my $self = shift;
@@ -129,11 +122,9 @@ sub data_is_deeply {
     );
 }
 
-
 sub data_match {
     goto &data_is_deeply;
 }
-
 
 sub header_is {
     my ($self, $name, $value, $desc) = @_;
@@ -143,7 +134,6 @@ sub header_is {
     );
 }
 
-
 sub header_isnt {
     my ($self, $name, $value, $desc) = @_;
     $desc ||= "not an exact match for header $name with value " . ($value // '');
@@ -151,7 +141,6 @@ sub header_isnt {
         'isnt', $self->response->header($name), $value, $desc
     );
 }
-
 
 sub header_like {
     my ($self, $name, $regex, $desc) = @_;
@@ -161,7 +150,6 @@ sub header_like {
     );
 }
 
-
 sub header_unlike {
     my ($self, $name, $regex, $desc) = @_;
     $desc ||= "header $name does not contain the expression specified";
@@ -170,7 +158,6 @@ sub header_unlike {
     );
 }
 
-
 sub status_is {
     my ($self, $code, $desc) = @_;
     $desc ||= "status is $code";
@@ -178,7 +165,6 @@ sub status_is {
         'is', $self->response->code, $code, $desc
     );
 }
-
 
 sub status_isnt {
     my ($self, $code, $desc) = @_;
@@ -209,11 +195,11 @@ Plack::Test::Simple::Transaction - PSGI Automated Application Testing Layer
 
 =head1 VERSION
 
-version 0.000008
+version 0.02
 
 =head1 SYNOPSIS
 
-    Test::More;
+    use Test::More;
     use Plack::Test::Simple::Transaction;
 
     # prepare test container

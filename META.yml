@@ -3,29 +3,30 @@ abstract: 'Object-Oriented PSGI Application Testing'
 author:
   - 'Al Newkirk <anewkirk@ana.io>'
 build_requires:
-  Plack: 1.0029
-  Test::More: 0
+  Plack: '1.0029'
+  Test::More: '0'
 configure_requires:
-  ExtUtils::MakeMaker: 6.30
+  ExtUtils::MakeMaker: '6.30'
 dynamic_config: 0
-generated_by: 'Dist::Zilla version 5.006, CPAN::Meta::Converter version 2.132830'
+generated_by: 'Dist::Zilla version 5.015, CPAN::Meta::Converter version 2.132830'
 license: perl
 meta-spec:
   url: http://module-build.sourceforge.net/META-spec-v1.4.html
-  version: 1.4
+  version: '1.4'
 name: Plack-Test-Simple
 requires:
-  Data::DPath: 0
-  Data::Dumper: 0
-  HTTP::Request: 0
-  HTTP::Response: 0
-  JSON: 0
-  Moo: 0
-  Plack: 1.0029
-  Test::More: 0
-  URI: 0
+  Data::DPath: '0'
+  Data::Dumper: '0'
+  HTTP::Request: '0'
+  HTTP::Response: '0'
+  JSON: '0'
+  Moo: '0'
+  Plack: '1.0029'
+  Test::More: '0'
+  URI: '0'
 resources:
   bugtracker: https://github.com/alnewkirk/Plack-Test-Simple/issues
   homepage: http://search.cpan.org/dist/Plack-Test-Simple/
   repository: git://github.com/alnewkirk/Plack-Test-Simple.git
-version: 0.000008
+version: '0.02'
+x_authority: cpan:AWNCORP

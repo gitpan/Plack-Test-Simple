@@ -4,7 +4,11 @@ Plack::Test::Simple - Object-Oriented PSGI Application Testing
 
 # VERSION
 
-version 0.000008
+version 0.02
+
+# STATUS
+
+<a href="https://travis-ci.org/alnewkirk/Plack-Test-Simple"><img src="https://travis-ci.org/alnewkirk/Plack-Test-Simple.svg?branch=master"></a>
 
 # SYNOPSIS
 

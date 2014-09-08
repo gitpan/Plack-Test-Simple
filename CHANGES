@@ -1,0 +1,44 @@
+Changelog for Plack-Test-Simple
+
+0.02 2014-09-08T07:57:00
+
+0.000008 2013-12-30T08:52:16
+ - v0.000008
+ - fixed psgi app reloading with multiple transactions
+
+0.000007 2013-09-01T16:43:39
+ - v0.000007
+ - documentation update
+
+0.000006 2013-08-29T05:59:11
+ - v0.000006
+ - automatic serialization of Perl data structures into the request content
+   body
+
+0.000005 2013-08-29T05:15:01
+ - v0.000005
+ - updated documentation
+
+0.000004 2013-08-29T04:42:45
+ - v0.000004
+ - completely refactored for better abstraction via a transaction layer,
+   better test methods and defaults, and using the new Plack test interface
+
+0.000003 2013-07-30T10:25:15
+ - v0.000003
+ - fixed env.psgi to prevent serialization failures
+
+0.000002 2013-07-30T01:55:52
+ - v0.000002
+ - updated documentation
+ - reset content-length before each request
+ - added version number to main module
+
+0.000001 2013-07-12T08:06:25
+ - v0.000001
+ - fixed common issue with test methods, updated documentation
+ - updated documentation
+ - refactored how psgi apps are loaded
+ - updated dist.ini
+ - initial commit
+

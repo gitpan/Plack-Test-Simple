@@ -2,25 +2,27 @@
 package Plack::Test::Simple;
 
 use utf8;
+
 use Carp;
 use HTTP::Request;
 use HTTP::Response;
-use URI;
 use Moo;
-use Plack::Util;
 use Plack::Test::Simple::Transaction;
+use Plack::Util;
+use URI;
+
 use JSON qw(encode_json);
 
-our $VERSION = '0.000008'; # VERSION
-
+our $VERSION = '0.02'; # VERSION
 
 sub BUILDARGS {
     my ($class, @args) = @_;
 
-    unshift @args, 'psgi' if $args[0] && !$args[1];
+    @args = @args == 1 ? 'HASH' eq ref $args[0] ?
+        %{$args[0]} : ('psgi', @args) : @args;
+
     return {@args};
 }
-
 
 has request => (
     is      => 'rw',
@@ -33,7 +35,6 @@ sub _build_request {
         uri => URI->new(scheme => 'http', host => 'localhost', path => '/')
     )
 }
-
 
 has psgi => (
     is     => 'rw',
@@ -52,7 +53,6 @@ has psgi => (
         return Plack::Test->create(Plack::Util::load_psgi($psgi));
     }
 );
-
 
 sub transaction {
     my ($self, $meth, $path, $cont) = @_;
@@ -74,15 +74,6 @@ sub transaction {
 
     return $trans;
 }
-
-
-
-
-
-
-
-
-
 
 sub AUTOLOAD {
     my ($self, @args)  = @_;
@@ -117,7 +108,7 @@ Plack::Test::Simple - Object-Oriented PSGI Application Testing
 
 =head1 VERSION
 
-version 0.000008
+version 0.02
 
 =head1 SYNOPSIS
 
